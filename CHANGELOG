@@ -1,0 +1,10 @@
+# 0.0.2 (Unreleased)
+- Logging options 
+
+# 0.0.1 (In progress) 
+
+- Metric about last scrape from server
+- Metric about version of exporter
+- Option to get data via proxy server
+- Get data from multiple API servers 
+- Image to run in Docker
