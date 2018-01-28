@@ -10,21 +10,20 @@ import json
 from prometheus_client import start_http_server, Summary
 from prometheus_client.core import GaugeMetricFamily, CounterMetricFamily, REGISTRY
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-from collections import OrderedDict
 
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 # VARIABLES
-LPORT = 2000
+LPORT = 9510
 FORMAT = '%(asctime)-15s %(levelname)s %(message)s'
 SRV = "api.coinmarketcap.com"
 stats = {}
 
 # ARGUMENTS
-parser = argparse.ArgumentParser(description='Prometheus Exporter')
-parser.add_argument('-d', '--debug', action='store_true', default=False, help='Enable debug logging [default: %default]')
-parser.add_argument('-c', '--currency', default='CZK', help='Set currency to convert [default: %default]')
-parser.add_argument('-t', '--timer', default=5, help='Scrape timing in seconds [default: %default]')
+parser = argparse.ArgumentParser(description='Cryptocurrency Exporter', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-d', '--debug', action='store_true', default=False, help='Enable debug logging')
+parser.add_argument('-c', '--currency', default='USD', help='Set currency to convert')
+parser.add_argument('-t', '--timer', default=5, help='Scrape timing in seconds') 
 
 # Try to connect
 def exporter():
@@ -95,12 +94,6 @@ if __name__ == '__main__':
     logging.getLogger('requests.packages.urllib3.connectionpool').setLevel(logging.ERROR)
     logging.info('Server starting...')
     logging.debug('Debug mode enabled')
-    if args.debug:
-        print("\n###")
-        print("# Port: {}".format(LPORT))
-        print("# Timer: {}".format(args.timer))
-        print("# Currency: {}".format(args.currency))
-        print("###\n")
     
     # Start up the server to expose the metrics.
     start_http_server(LPORT)
