@@ -1,6 +1,6 @@
 # Cryptocurrency Exporter
 Simple cryptocurrency exporter written in Python to expose metrics. Cryptocurrencies could be converted to specified currency as USD, EUR, CZK, etc.
-I recommend set a timer to **5 seconds or higher** because servers of **coinmarketcap.com** would be overloaded. Server running on port 9150. 
+I recommend set a timer to **5 seconds or higher** because servers of **coinmarketcap.com** would be overloaded. Server running on port 9510. 
 
 You can convert currencies to: *AUD, BRL, CAD, CHF, CLP, CNY, CZK, DKK, EUR, GBP, HKD, HUF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, PKR, PLN, RUB, SEK, SGD, THB, TRY, TWD, ZAR*
 
