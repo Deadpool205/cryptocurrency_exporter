@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import time
 import sys
@@ -67,13 +67,22 @@ class CustomCollector(object):
             crypto_last_update = CounterMetricFamily('crypto_last_update', 'Cryptocurrency last update', labels=['name', 'id', 'symbol', 'rank'])
             
             for item in get_data["crypto"]:
-                crypto_converted.add_metric([item['name'], item['id'], item['symbol'], item['price_btc'], args.currency, item['rank']], float(item['price_' + args.currency.lower()]))
+                try:
+                    crypto_converted.add_metric([item['name'], item['id'], item['symbol'], item['price_btc'], args.currency, item['rank']], float(item['price_' + args.currency.lower()]))
+                except:
+                    logging.debug("No metrics (converted)")
                 
-                crypto_percent.add_metric([item['name'], item['id'], item['symbol'], "1h", item['rank']], float(item['percent_change_1h']))
-                crypto_percent.add_metric([item['name'], item['id'], item['symbol'], "24h", item['rank']], float(item['percent_change_24h']))
-                crypto_percent.add_metric([item['name'], item['id'], item['symbol'], "7d", item['rank']], float(item['percent_change_7d']))
+                try:
+                    crypto_percent.add_metric([item['name'], item['id'], item['symbol'], "1h", item['rank']], float(item['percent_change_1h']))
+                    crypto_percent.add_metric([item['name'], item['id'], item['symbol'], "24h", item['rank']], float(item['percent_change_24h']))
+                    crypto_percent.add_metric([item['name'], item['id'], item['symbol'], "7d", item['rank']], float(item['percent_change_7d']))
+                except:
+                    logging.debug("No metrics (percent)")
                 
-                crypto_last_update.add_metric([item['name'], item['id'], item['symbol'], item['rank']], float(item['last_updated']))
+                try:
+                    crypto_last_update.add_metric([item['name'], item['id'], item['symbol'], item['rank']], float(item['last_updated']))
+                except:
+                    logging.debug("No metrics (last_update)")
             
             yield crypto_converted
             yield crypto_percent
