@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jsedy7/cryptocurrency_exporter.svg?branch=master)](https://travis-ci.org/jsedy7/cryptocurrency_exporter)
+
 # Cryptocurrency Exporter
 Simple cryptocurrency exporter written in Python to expose metrics. Cryptocurrencies could be converted to specified currency as USD, EUR, CZK, etc.
 I recommend set a timer to **5 seconds or higher** because servers of **coinmarketcap.com** would be overloaded. Server running on port 9510. 

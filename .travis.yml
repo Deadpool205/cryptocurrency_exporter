@@ -16,5 +16,3 @@ jobs:
     - stage: test
       script: 
       - docker run --rm -p 0.0.0.0:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter --test
-    - script:
-      - "for ((i=1;i<=25;i++)); do curl localhost:9510/metrics ; done"
