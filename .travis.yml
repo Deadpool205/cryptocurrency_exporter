@@ -15,5 +15,6 @@ jobs:
       - docker push $DOCKER_USERNAME/cryptocurrency_exporter
     - stage: test
       script: 
-      - docker run --rm -p 127.0.0.1:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter
-    - script: docker run --rm -p 127.0.0.1:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter
+      - docker run --rm -p 0.0.0.0:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter
+    - script:
+      - "curl 127.0.0.1:9510/metrics"
