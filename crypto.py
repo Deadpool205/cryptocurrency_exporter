@@ -7,6 +7,7 @@ import argparse
 import logging
 import requests
 import json
+import sys
 from prometheus_client import start_http_server, Summary
 from prometheus_client.core import GaugeMetricFamily, CounterMetricFamily, REGISTRY
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
@@ -24,6 +25,7 @@ parser = argparse.ArgumentParser(description='Cryptocurrency Exporter', formatte
 parser.add_argument('-d', '--debug', action='store_true', default=False, help='Enable debug logging')
 parser.add_argument('-c', '--currency', default='USD', help='Set currency to convert')
 parser.add_argument('-t', '--timer', default=5, help='Scrape timing in seconds') 
+parser.add_argument('-T', '--test', action='store_true', default=False, help='Testing function')
 
 # Try to connect
 def exporter():
@@ -115,6 +117,11 @@ if __name__ == '__main__':
             # Sleep to next scrape from server 
             time.sleep(args.timer)
             get_data = exporter()
+            if args.test:
+                logging.info('Testing instance ends after 2 minutes.')
+                logging.info('Ready to scrape...')
+                sleep(120)
+                sys.exit(0)
     except KeyboardInterrupt:
         logging.info('Server has been stopped!')
     except:
