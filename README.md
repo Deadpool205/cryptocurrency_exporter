@@ -20,6 +20,20 @@ optional arguments:
   -t TIMER, --timer TIMER
                         Scrape timing in seconds (default: 5)
 ```
+## Docker image
+
+- Pull image
+```
+docker pull jsedy7/cryptocurrency_exporter
+```
+
+- Start Exporter
+```
+docker run --rm -it -p 0.0.0.0:9510:9510 jsedy7/cryptocurrency_exporter --debug     ## testing
+docker run -d -p 0.0.0.0:9510:9510 jsedy7/cryptocurrency_exporter --debug           ## run with debug logging
+docker run -d -p 0.0.0.0:9510:9510 jsedy7/cryptocurrency_exporter                   ## run exporter
+
+```
 
 ## Examples
 
