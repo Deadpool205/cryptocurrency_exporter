@@ -120,7 +120,7 @@ if __name__ == '__main__':
             if args.test:
                 logging.info('Testing instance ends after 2 minutes.')
                 logging.info('Ready to scrape...')
-                sleep(120)
+                time.sleep(120)
                 sys.exit(0)
     except SystemExit:
         logging.info('Server has been stopped!')
