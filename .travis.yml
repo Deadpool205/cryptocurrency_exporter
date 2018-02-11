@@ -1,0 +1,19 @@
+sudo: required
+
+language: python3
+
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      - docker build -t $DOCKER_USERNAME/cryptocurrency_exporter .
+      - docker images
+      - docker push $DOCKER_USERNAME/cryptocurrency_exporter
+    - stage: test
+      script: 
+      - docker run --rm -p 127.0.0.1:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter
+    - script: docker run --rm -p 127.0.0.1:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter
