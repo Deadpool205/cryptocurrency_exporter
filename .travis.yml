@@ -6,7 +6,7 @@ services:
   - docker
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.4.2
+  - DOCKER_COMPOSE_VERSION=0.0.1
 
 jobs:
   include:
