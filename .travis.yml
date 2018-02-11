@@ -6,7 +6,8 @@ services:
   - docker
 
 env:
-  - DOCKER_COMPOSE_VERSION=0.0.1
+  global:
+  - IMAGE_VERSION=0.0.1
 
 jobs:
   include:
@@ -16,7 +17,8 @@ jobs:
       - docker build -t $DOCKER_USERNAME/cryptocurrency_exporter .
       - docker images
       - docker push $DOCKER_USERNAME/cryptocurrency_exporter
-      - docker push $DOCKER_USERNAME/cryptocurrency_exporter:${DOCKER_COMPOSE_VERSION}
+      - docker tag $DOCKER_USERNAME/cryptocurrency_exporter $DOCKER_USERNAME/cryptocurrency_exporter:${IMAGE_VERSION}
+      - docker push $DOCKER_USERNAME/cryptocurrency_exporter:${IMAGE_VERSION}
     - stage: test
       script: 
       - docker run --rm -p 0.0.0.0:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter --test
