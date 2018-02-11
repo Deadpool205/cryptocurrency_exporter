@@ -122,7 +122,9 @@ if __name__ == '__main__':
                 logging.info('Ready to scrape...')
                 sleep(120)
                 sys.exit(0)
-    except SystemExit, KeyboardInterrupt:
+    except SystemExit:
+        logging.info('Server has been stopped!')
+    except KeyboardInterrupt:
         logging.info('Server has been stopped!')
     except:
         logging.fatal("Server has been unexpectedly stopped!")

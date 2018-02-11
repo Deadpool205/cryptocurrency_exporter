@@ -1,9 +1,12 @@
 sudo: required
 
-language: python3
+language: python
 
 services:
   - docker
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.4.2
 
 jobs:
   include:
@@ -13,6 +16,11 @@ jobs:
       - docker build -t $DOCKER_USERNAME/cryptocurrency_exporter .
       - docker images
       - docker push $DOCKER_USERNAME/cryptocurrency_exporter
+      - docker push $DOCKER_USERNAME/cryptocurrency_exporter:${DOCKER_COMPOSE_VERSION}
     - stage: test
       script: 
       - docker run --rm -p 0.0.0.0:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter --test
+    - stage: secondtest
+      script:
+      - docker run -d -p 0.0.0.0:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter --test
+      - for i in {1..30}; do curl localhost:9150; done
