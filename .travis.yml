@@ -25,4 +25,4 @@ jobs:
     - stage: secondtest
       script:
       - docker run -d -p 0.0.0.0:9510:9510 $DOCKER_USERNAME/cryptocurrency_exporter --test
-      - for i in {1..30}; do curl localhost:9150; done
+      - for i in {1..30}; do curl -sw '%{http_code}' localhost:9510/metrics && if [ $? = 0  ]; then exit 0; fi; sleep 2 ; done
